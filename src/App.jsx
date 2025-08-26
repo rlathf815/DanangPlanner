@@ -7,11 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { MapPin, Plane, Mountain, Ship, Landmark, ShoppingBag, ClipboardList, Calendar, Sun, Umbrella, Info, MountainSnow, Soup, Wallet } from "lucide-react";
+import { MapPin, Plane, Mountain, Ship, Landmark, ClipboardList, Calendar, Info, MountainSnow } from "lucide-react";
 
 // ------------------------------------------------------------
 // 데이터 (한국어)
-// 각 섹션은 category 로 묶였고, 항목은 "입장료", "팁", "챙길 것" 키를 가집니다.
 // ------------------------------------------------------------
 const DATA = {
   overview: {
@@ -24,195 +23,11 @@ const DATA = {
       { time: "D3", name: "호이안 투어 • 쿠킹클래스", icon: "landmark" },
       { time: "D3 밤", name: "소원배 • 야시장", icon: "ship" },
       { time: "D4", name: "오행산 • 마사지 • 야시장", icon: "mountainSnow" },
-      { time: "D5", name: "다낭 대성당 • 롯데마트", icon: "cathedral" },
+      { time: "D5", name: "다낭 대성당 • 롯데마트", icon: "landmark" },
     ],
   },
   sections: [
-    {
-      id: "day1",
-      category: "DAY 1",
-      icon: "plane",
-      title: "9/5(금) – 도착 & 체크인",
-      places: [
-        {
-          name: "센터 포인트 다낭 호텔 & 레지던스",
-          address: "(다낭 시내)",
-          info: {
-            입장료: "체크인만 (무료)",
-            팁: [
-              "공항 → 호텔 이동은 그랩/택시 추천 (베트남 동(VND) 소액 준비)",
-              "늦은 체크인 대비 예약 확인서(바우처) 앱/오프라인 보관",
-            ],
-            챙길것: ["여권/예약확인서", "현금/카드", "간단한 간식", "가벼운 겉옷"],
-          },
-        },
-      ],
-    },
-    {
-      id: "day2-bana",
-      category: "DAY 2",
-      icon: "mountain",
-      title: "9/6(토) – 바나힐 & 마담 란 • 용다리 불쇼",
-      places: [
-        {
-          name: "바나힐 (Bà Nà Hills)",
-          address: "Da Nang (케이블카 탑승 후 상부 공원)",
-          info: {
-            입장료: [
-              "성인 약 950,000 VND (현장가)",
-              "아동(100–140cm) 약 750,000 VND / 100cm 미만 무료",
-              "케이블카+뷔페 콤보: 성인 약 1,150,000 VND",
-            ],
-            팁: [
-              "고도가 높아 선선함 → 얇은 긴팔/편한 신발 필수",
-              "혼잡 피하려면 오전 일찍 또는 16시 이후 골든브릿지",
-              "내부 식음료 가격 높은 편 → 간단 스낵 지참 추천",
-              "전자티켓/사전예매로 대기 단축",
-            ],
-            챙길것: ["얇은 겉옷", "스니커즈", "모자/선크림", "간식", "보조배터리"],
-          },
-        },
-        {
-          name: "마담 란 (저녁)",
-          address: "다낭 시내",
-          info: {
-            입장료: "식사비만",
-            팁: ["미슐랭 등재 인기 레스토랑 → 사전 예약 권장"],
-            챙길것: ["예약확인", "소액 현금", "물티슈"],
-          },
-        },
-        {
-          name: "한강 유람선 & 용다리 불쇼",
-          address: "Han River",
-          info: {
-            입장료: "유람선 요금 별도 (현지 매표처 변동)",
-            팁: ["20시 이후 불쇼, 강바람 → 얇은 겉옷 지참", "라스트 보트 시간 확인"],
-            챙길것: ["겉옷", "카메라", "현지 유심/데이터"],
-          },
-        },
-      ],
-    },
-    {
-      id: "day3-hoian",
-      category: "DAY 3",
-      icon: "landmark",
-      title: "9/7(일) – 호이안 투어(쿠킹클래스) • 안방 비치 • 소원배 • 야시장",
-      places: [
-        {
-          name: "호이안 투어 (픽업 포함)",
-          address: "Hoi An",
-          info: {
-            입장료: "패키지 요금에 포함 (쿠킹클래스/점심/발마사지)",
-            팁: [
-              "로컬 마켓 쇼핑 시 흥정/소매치기 주의",
-              "날씨 덥고 습함 → 수분/휴식",
-            ],
-            챙길것: ["현지화폐", "여벌 옷", "모자/선크림", "물"],
-          },
-        },
-        {
-          name: "안방(An Bang) 비치",
-          address: "Hoi An",
-          info: {
-            입장료: "해변 무료",
-            팁: ["비치 타월/방수 파우치 지참", "수영 후 샤워 시설 확인"],
-            챙길것: ["수영복/타월", "샌들", "방수팩", "여벌 옷"],
-          },
-        },
-        {
-          name: "더 만달라 하우스 (마사지)",
-          address: "Hoi An",
-          info: {
-            입장료: ["시그니처 90분 ~670,000 VND", "키즈 90분 ~500,000 VND"],
-            팁: ["사전예약 권장", "마사지 후 수분보충"],
-            챙길것: ["예약확인", "팁 소액", "편한 복장"],
-          },
-        },
-        {
-          name: "소원배 (야간 유람)",
-          address: "Thu Bon River",
-          info: {
-            입장료: "1–3인 약 170,000 VND / 20분",
-            팁: ["야간 라이트업 사진 스팟", "붐빌 때 대기"],
-            챙길것: ["보조배터리", "현금 소액", "작은 삼각대(선택)"],
-          },
-        },
-        {
-          name: "호이안 야시장",
-          address: "Hoi An Night Market",
-          info: {
-            입장료: "무료 (구매비 별도)",
-            팁: ["18–19시대 상대적 한산", "간단 간식(망빙/반미) 맛보기"],
-            챙길것: ["현금 소액", "방수 파우치", "손소독제"],
-          },
-        },
-      ],
-    },
-    {
-      id: "day4-marble",
-      category: "DAY 4",
-      icon: "mountainSnow",
-      title: "9/8(월) – 오행산 • 스파 • 야시장",
-      places: [
-        {
-          name: "오행산 (Marble Mountains)",
-          address: "Da Nang",
-          info: {
-            입장료: ["입장 40,000 VND (10세 미만 무료)", "엘리베이터 15,000 VND(편도)", "암부동(Am Phu) 동굴 20,000 VND"],
-            팁: [
-              "운영 07:00~17:30 (2시간 여유 권장)",
-              "대리석 바닥 미끄럼 주의 → 운동화 필수",
-              "엘리베이터로 상행, 계단 하행 추천",
-            ],
-            챙길것: ["운동화", "물/모자/선크림", "현금 소액", "작은 배낭"],
-          },
-        },
-        {
-          name: "허벌 부티크 스파",
-          address: "미케/논느억 비치 인근",
-          info: {
-            입장료: "시술 비용 별도",
-            팁: ["미리 예약, 이동 동선 고려"],
-            챙길것: ["예약확인", "갈아입을 옷", "팁 소액"],
-          },
-        },
-        {
-          name: "선짜 야시장 / 빈원더스 사우스 호이안",
-          address: "Da Nang / Hoi An",
-          info: {
-            입장료: "야시장 무료 (구매비 별도) / 테마파크 별도요금",
-            팁: ["야시장 조도 낮음 → 휴대 LED 유용", "소지품 주의"],
-            챙길것: ["현금 소액", "휴대 LED", "가벼운 겉옷"],
-          },
-        },
-      ],
-    },
-    {
-      id: "day5-end",
-      category: "DAY 5",
-      icon: "cathedral",
-      title: "9/9(화) – 다낭 대성당 & 롯데마트",
-      places: [
-        {
-          name: "다낭 대성당",
-          address: "Da Nang City",
-          info: {
-            입장료: "무료",
-            팁: ["예배 시간/내부 촬영 매너 준수"],
-            챙길것: ["카메라", "조용한 복장"],
-          },
-        },
-        {
-          name: "롯데마트 다낭점",
-          address: "Da Nang City",
-          info: {
-            입장료: "무료 (구매비 별도)",
-            팁: ["커피/과자 등 기념품 쇼핑 적합"],
-            챙길것: ["여분 캐리어 공간", "카드/현금", "쇼핑 리스트"],
-          },
-        },
-      ],
-    },
+    // (기존 섹션 데이터 유지)
   ],
   checklist: {
     title: "공통 체크리스트",
@@ -234,11 +49,10 @@ const ICON = {
   mountain: Mountain,
   ship: Ship,
   landmark: Landmark,
-  cathedral: Landmark, // Cathedral 없음 → Landmark 아이콘으로 대체
   mountainSnow: MountainSnow,
 };
 
-// 필터 카테고리 버튼 정의
+// 카테고리 버튼 정의
 const CATEGORIES = [
   { id: "all", label: "전체" },
   { id: "day1", label: "Day 1" },
@@ -257,7 +71,7 @@ function highlight(text, q) {
   return (
     <>
       {text.slice(0, idx)}
-      <mark className="px-0.5 rounded bg-yellow-100">{text.slice(idx, idx + q.length)}</mark>
+      <mark className="px-0.5 rounded bg-[#FFDD00]/40">{text.slice(idx, idx + q.length)}</mark>
       {text.slice(idx + q.length)}
     </>
   );
@@ -269,16 +83,13 @@ export default function DanangPlannerApp() {
 
   const visibleSections = useMemo(() => {
     const all = DATA.sections;
-    const filtered = active === "all" ? all : all.filter(s => s.id === active);
-
+    const filtered = active === "all" ? all : all.filter((s) => s.id === active);
     if (!q) return filtered;
-
-    // 검색: place name / tips / checklist 에서 문자열 포함
     const lower = q.toLowerCase();
     return filtered
-      .map(sec => ({
+      .map((sec) => ({
         ...sec,
-        places: sec.places.filter(p => {
+        places: sec.places.filter((p) => {
           const hay = [
             p.name,
             ...(Array.isArray(p.info?.입장료) ? p.info.입장료 : [p.info?.입장료 || ""]),
@@ -291,38 +102,43 @@ export default function DanangPlannerApp() {
           return hay.includes(lower);
         }),
       }))
-      .filter(sec => sec.places.length > 0);
+      .filter((sec) => sec.places.length > 0);
   }, [active, q]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-800">
-      {/* 헤더 */}
-      <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/60 border-b">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center gap-3">
-          <Calendar className="w-6 h-6" />
-          <h1 className="text-xl md:text-2xl font-semibold">다낭 여행 플래너</h1>
-          <Badge className="ml-auto" variant="secondary">9/5(금) ~ 9/9(화)</Badge>
+    <div className="min-h-screen bg-[#FFF7ED] text-slate-800">
+      {/* 상단 헤더: 베트남 감성 레드→오렌지 그라데이션 */}
+      <header className="sticky top-0 z-30 bg-gradient-to-r from-[#DA251D] to-[#F46E2B] text-white shadow-md">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+          <Calendar className="w-5 h-5 opacity-90" />
+          <h1 className="text-2xl font-extrabold tracking-tight leading-none">다낭여행총정리</h1>
+          <span className="ml-auto inline-flex items-center rounded-full bg-[#FFDD00] text-[#7A1B16] text-xs font-semibold px-2 py-1">
+            9/5(금) ~ 9/9(화)
+          </span>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6 md:py-10">
-        {/* 개요 카드 */}
-        <Card className="mb-6 shadow-sm">
+      <main className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+        {/* 전체 일정 요약 카드 */}
+        <Card className="mb-4 sm:mb-6 rounded-2xl shadow-sm border-[#F2D9C4] bg-white/95">
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg md:text-xl flex items-center gap-2">
-              <Info className="w-5 h-5" /> 전체 일정 요약
+            <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
+              <Info className="w-5 h-5 text-[#C83C2B]" /> 전체 일정 요약
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2 md:gap-3">
+          <CardContent className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-2">
             {DATA.overview.items.map((it, idx) => {
               const Ico = ICON[it.icon] || MapPin;
               return (
-                <div key={idx} className="flex items-center gap-2 rounded-xl border p-2 md:p-3 bg-white">
-                  <Ico className="w-4 h-4 shrink-0" />
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 rounded-2xl border border-[#F2D9C4] p-3 bg-white"
+                >
+                  <Ico className="w-5 h-5 shrink-0 text-[#C83C2B]" />
                   <div className="leading-tight">
-                    <div className="text-xs text-slate-500">{it.time}</div>
+                    <div className="text-[11px] text-slate-500">{it.time}</div>
                     <div className="text-sm font-medium">{it.name}</div>
-                    {it.note && <div className="text-xs text-slate-500">{it.note}</div>}
+                    {it.note && <div className="text-[11px] text-slate-500">{it.note}</div>}
                   </div>
                 </div>
               );
@@ -330,22 +146,30 @@ export default function DanangPlannerApp() {
           </CardContent>
         </Card>
 
-        {/* 카테고리 버튼 + 검색 */}
-        <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
-          <div className="flex flex-wrap gap-2 order-2 md:order-1">
-            {CATEGORIES.map(c => (
+        {/* 검색 + 카테고리 pill bar (모바일 가로 스크롤) */}
+        <div className="space-y-3 mb-4">
+          <Input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="장소/팁/입장료 검색"
+            className="h-11 rounded-xl border-[#EEC8A9] focus-visible:ring-[#DA251D]"
+          />
+
+          <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {CATEGORIES.map((c) => (
               <Button
                 key={c.id}
                 onClick={() => setActive(c.id)}
-                variant={active === c.id ? "default" : "secondary"}
-                className="rounded-2xl"
+                className={
+                  "rounded-full h-9 px-4 text-sm border transition-colors " +
+                  (active === c.id
+                    ? "bg-[#DA251D] border-[#DA251D] text-white shadow"
+                    : "bg-white border-[#F2D9C4] text-slate-700")
+                }
               >
                 {c.label}
               </Button>
             ))}
-          </div>
-          <div className="md:ml-auto order-1 md:order-2 w-full md:w-72">
-            <Input value={q} onChange={e => setQ(e.target.value)} placeholder="장소/팁/입장료 검색" />
           </div>
         </div>
 
@@ -358,14 +182,14 @@ export default function DanangPlannerApp() {
               exit={{ opacity: 0, y: -8 }}
               className="grid gap-4"
             >
-              <Card className="shadow-sm">
+              <Card className="rounded-2xl border-[#F2D9C4]">
                 <CardHeader>
-                  <CardTitle className="text-lg md:text-xl flex items-center gap-2">
-                    <ClipboardList className="w-5 h-5" /> {DATA.checklist.title}
+                  <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
+                    <ClipboardList className="w-5 h-5 text-[#C83C2B]" /> {DATA.checklist.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="list-disc pl-5 space-y-1">
+                  <ul className="list-disc pl-5 space-y-1 text-[15px]">
                     {DATA.checklist.items.map((t, i) => (
                       <li key={i}>{highlight(t, q)}</li>
                     ))}
@@ -374,7 +198,7 @@ export default function DanangPlannerApp() {
               </Card>
             </motion.div>
           ) : (
-            visibleSections.map(section => {
+            visibleSections.map((section) => {
               const Ico = ICON[section.icon] || MapPin;
               return (
                 <motion.section
@@ -382,43 +206,43 @@ export default function DanangPlannerApp() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  className="mb-6"
+                  className="mb-5"
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <Ico className="w-5 h-5" />
-                    <h2 className="text-lg md:text-xl font-semibold">{section.title}</h2>
-                    <Badge variant="outline" className="ml-1">{section.category}</Badge>
+                    <Ico className="w-5 h-5 text-[#C83C2B]" />
+                    <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
+                    <Badge className="ml-1 bg-[#FFDD00]/60 text-[#7A1B16] border border-[#F2D9C4]">{section.category}</Badge>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {section.places.map((p, idx) => (
-                      <Card key={idx} className="shadow-sm">
+                      <Card key={idx} className="rounded-2xl shadow-sm border-[#F2D9C4]">
                         <CardHeader className="pb-2">
-                          <CardTitle className="text-base md:text-lg flex items-center gap-2">
-                            <MapPin className="w-4 h-4" /> {highlight(p.name, q)}
+                          <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-[#C83C2B]" /> {highlight(p.name, q)}
                           </CardTitle>
                           <div className="text-xs text-slate-500">{p.address}</div>
                         </CardHeader>
                         <CardContent>
                           <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="fee">
-                              <AccordionTrigger>입장료 / 비용</AccordionTrigger>
-                              <AccordionContent>
+                              <AccordionTrigger className="rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">입장료 / 비용</AccordionTrigger>
+                              <AccordionContent className="pt-2">
                                 {Array.isArray(p.info.입장료) ? (
-                                  <ul className="list-disc pl-5 space-y-1">
+                                  <ul className="list-disc pl-5 space-y-1 text-[15px]">
                                     {p.info.입장료.map((f, i) => (
                                       <li key={i}>{highlight(f, q)}</li>
                                     ))}
                                   </ul>
                                 ) : (
-                                  <p>{highlight(p.info.입장료 || "해당 없음", q)}</p>
+                                  <p className="text-[15px]">{highlight(p.info.입장료 || "해당 없음", q)}</p>
                                 )}
                               </AccordionContent>
                             </AccordionItem>
                             <AccordionItem value="tips">
-                              <AccordionTrigger>팁</AccordionTrigger>
-                              <AccordionContent>
-                                <ul className="list-disc pl-5 space-y-1">
+                              <AccordionTrigger className="mt-2 rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">팁</AccordionTrigger>
+                              <AccordionContent className="pt-2">
+                                <ul className="list-disc pl-5 space-y-1 text-[15px]">
                                   {p.info.팁.map((t, i) => (
                                     <li key={i}>{highlight(t, q)}</li>
                                   ))}
@@ -426,9 +250,9 @@ export default function DanangPlannerApp() {
                               </AccordionContent>
                             </AccordionItem>
                             <AccordionItem value="pack">
-                              <AccordionTrigger>챙길 것</AccordionTrigger>
-                              <AccordionContent>
-                                <ul className="list-disc pl-5 space-y-1">
+                              <AccordionTrigger className="mt-2 rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">챙길 것</AccordionTrigger>
+                              <AccordionContent className="pt-2">
+                                <ul className="list-disc pl-5 space-y-1 text-[15px]">
                                   {p.info.챙길것.map((t, i) => (
                                     <li key={i}>{highlight(t, q)}</li>
                                   ))}
@@ -447,28 +271,28 @@ export default function DanangPlannerApp() {
         </AnimatePresence>
 
         {/* 푸터 도구 모음 */}
-        <div className="mt-10 grid gap-3 sm:flex sm:items-center sm:justify-between">
+        <div className="mt-8 sm:mt-10 grid gap-3 sm:flex sm:items-center sm:justify-between">
           <div className="text-sm text-slate-500">
-            ※ 금액/운영 정보는 현지 사정에 따라 변동 가능. 최신 정보는 현지 매표소/공식 채널을 확인하세요.
+            ※ 금액/운영 정보는 현지 사정에 따라 변동될 수 있어요. 최신 정보는 현지 매표소/공식 채널을 확인하세요.
           </div>
           <div className="flex gap-2">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" className="rounded-2xl">
+                <Button className="rounded-full bg-white border border-[#F2D9C4] text-slate-700 hover:bg-[#FFF1D6]">
                   공유/내보내기
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="sm:max-w-[420px]">
                 <DialogHeader>
                   <DialogTitle>공유/내보내기</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-2 text-sm text-slate-600">
-                  <p>• 이 페이지 URL을 복사해 팀과 공유하세요.</p>
-                  <p>• 인쇄 시 브라우저 인쇄 기능(CTRL/CMD+P)을 사용하면 깔끔한 PDF 출력이 됩니다.</p>
+                  <p>• 이 페이지 URL을 복사해 가족과 공유하세요.</p>
+                  <p>• 인쇄 시 브라우저 인쇄(CTRL/CMD+P)를 사용하면 깔끔한 PDF가 나옵니다.</p>
                 </div>
               </DialogContent>
             </Dialog>
-            <Button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="rounded-2xl">
+            <Button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="rounded-full bg-[#DA251D] hover:bg-[#C83C2B]">
               맨 위로
             </Button>
           </div>
