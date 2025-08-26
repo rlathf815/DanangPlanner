@@ -1,8 +1,6 @@
 
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -188,3 +186,6 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+/* src/index.css 맨 아래 쯤 */
+html, body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif; }
+* { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
