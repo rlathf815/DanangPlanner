@@ -740,18 +740,7 @@ export default function DanangPlannerApp() {
             ※ 금액/운영 정보는 현지 사정에 따라 변동될 수 있어요. 최신 정보는 현지 매표소/공식 채널을 확인하세요.
           </div>
           <div style={{display:"flex", gap:8}}>
-            <Dialog>
-              <DialogTrigger asChild>
-                <button className="footer-btn">공유/내보내기</button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader><DialogTitle>공유/내보내기</DialogTitle></DialogHeader>
-                <div className="footer-note">
-                  <p>• 이 페이지 URL을 복사해 가족과 공유하세요.</p>
-                  <p>• 인쇄 시 브라우저 인쇄(CTRL/CMD+P)를 사용하면 깔끔한 PDF가 나옵니다.</p>
-                </div>
-              </DialogContent>
-            </Dialog>
+            
             <button className="footer-btn primary" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
               맨 위로
             </button>
