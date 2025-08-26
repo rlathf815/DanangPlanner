@@ -1,11 +1,9 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MapPin, Plane, Mountain, Ship, Landmark, ClipboardList, Calendar, Info, MountainSnow } from "lucide-react";
 
@@ -295,7 +293,7 @@ export default function DanangPlannerApp() {
 
   return (
     <div className="min-h-screen bg-[#FFF7ED] text-slate-800">
-      {/* 상단 헤더: 베트남 감성 레드→오렌지 그라데이션 */}
+      {/* 상단 헤더 */}
       <header className="sticky top-0 z-30 bg-gradient-to-r from-[#DA251D] to-[#F46E2B] text-white shadow-md">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <Calendar className="w-5 h-5 opacity-90" />
@@ -320,7 +318,7 @@ export default function DanangPlannerApp() {
               return (
                 <div
                   key={idx}
-                  className="flex items-center gap-2 rounded-2xl border border-[#F2D9C4] p-3 bg-white"
+                  className="flex items-center gap-2 rounded-2xl border border-[#F2D9C4] p-3 bg-white h-20"
                 >
                   <Ico className="w-5 h-5 shrink-0 text-[#C83C2B]" />
                   <div className="leading-tight">
@@ -334,29 +332,29 @@ export default function DanangPlannerApp() {
           </CardContent>
         </Card>
 
-        {/* 검색 + 카테고리 pill bar (모바일 가로 스크롤) */}
+        {/* 검색 + 카테고리 pill bar */}
         <div className="space-y-3 mb-4">
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="장소/팁/입장료 검색"
-            className="h-11 rounded-xl border-[#EEC8A9] focus-visible:ring-[#DA251D]"
+            className="h-14 rounded-xl text-[15px] border-[#EEC8A9] focus-visible:ring-[#DA251D]"
           />
 
           <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {CATEGORIES.map((c) => (
-              <Button
+              <button
                 key={c.id}
                 onClick={() => setActive(c.id)}
                 className={
-                  "rounded-full h-9 px-4 text-sm border transition-colors " +
+                  "shrink-0 rounded-full h-9 px-4 text-sm border transition-colors " +
                   (active === c.id
                     ? "bg-[#DA251D] border-[#DA251D] text-white shadow"
                     : "bg-white border-[#F2D9C4] text-slate-700")
                 }
               >
                 {c.label}
-              </Button>
+              </button>
             ))}
           </div>
         </div>
@@ -466,9 +464,9 @@ export default function DanangPlannerApp() {
           <div className="flex gap-2">
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="rounded-full bg-white border border-[#F2D9C4] text-slate-700 hover:bg-[#FFF1D6]">
+                <button className="rounded-full bg-white border border-[#F2D9C4] text-slate-700 hover:bg-[#FFF1D6] h-10 px-4">
                   공유/내보내기
-                </Button>
+                </button>
               </DialogTrigger>
               <DialogContent className="sm:max-w-[420px]">
                 <DialogHeader>
@@ -480,9 +478,9 @@ export default function DanangPlannerApp() {
                 </div>
               </DialogContent>
             </Dialog>
-            <Button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="rounded-full bg-[#DA251D] hover:bg-[#C83C2B]">
+            <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="rounded-full bg-[#DA251D] hover:bg-[#C83C2B] h-10 px-4 text-white">
               맨 위로
-            </Button>
+            </button>
           </div>
         </div>
       </main>
