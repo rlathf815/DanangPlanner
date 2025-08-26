@@ -399,14 +399,8 @@ const DATA = {
 
 /* 아이콘 매핑 */
 const ICON = {
-  plane: Plane,
-  mountain: Mountain,
-  ship: Ship,
-  landmark: Landmark,
-  mountainSnow: MountainSnow,
-  shopping: ShoppingBag,
-  grab: Car,
-  warning: AlertTriangle,
+  plane: Plane, mountain: Mountain, ship: Ship, landmark: Landmark, mountainSnow: MountainSnow,
+  shopping: ShoppingBag, grab: Car, warning: AlertTriangle,
 };
 
 /* 카테고리 버튼 */
@@ -431,7 +425,7 @@ function highlight(text, q) {
   return (
     <>
       {text.slice(0, idx)}
-      <mark className="px-0.5 rounded bg-[#f5c400]/40">{text.slice(idx, idx + q.length)}</mark>
+      <mark className="hl">{text.slice(idx, idx + q.length)}</mark>
       {text.slice(idx + q.length)}
     </>
   );
@@ -447,22 +441,19 @@ export default function DanangPlannerApp() {
 
   // 환율 계산기 상태
   const [vnd, setVnd] = useState("");
-  const [rate, setRate] = useState(0.055); // 1 VND → KRW (대략값)
+  const [rate, setRate] = useState(0.055);
   const krw = useMemo(() => parseFloat(vnd || "0") * parseFloat(rate || "0"), [vnd, rate]);
 
-  // 전체 일정 요약 토글 (기본: 접힘)
   const [showSummary, setShowSummary] = useState(false);
 
   const visibleSections = useMemo(() => {
     const all = DATA.sections;
     const filtered = active === "all" ? all : all.filter((s) => s.id === active);
-
     if (!q) return filtered;
-
     const lower = q.toLowerCase();
+
     return filtered
       .map((sec) => {
-        // Day/일반 섹션 (places) 필터
         if (sec.places) {
           const places = sec.places.filter((p) => {
             const hay = [
@@ -470,27 +461,17 @@ export default function DanangPlannerApp() {
               ...(Array.isArray(p.info?.입장료) ? p.info.입장료 : [p.info?.입장료 || ""]),
               ...(p.info?.팁 || []),
               ...(p.info?.챙길것 || []),
-            ]
-              .filter(Boolean)
-              .join(" \n ")
-              .toLowerCase();
+            ].filter(Boolean).join("\n").toLowerCase();
             return hay.includes(lower);
           });
           return { ...sec, places };
         }
-
-        // 쇼핑(그룹) 섹션 필터
         if (sec.groups) {
           const groups = sec.groups
-            .map((g) => ({
-              ...g,
-              items: g.items.filter((it) => String(it).toLowerCase().includes(lower)),
-            }))
+            .map((g) => ({ ...g, items: g.items.filter((it) => String(it).toLowerCase().includes(lower)) }))
             .filter((g) => g.items.length > 0 || g.title.toLowerCase().includes(lower));
           return { ...sec, groups };
         }
-
-        // 그랩/주의 (items) 섹션 필터
         if (sec.items) {
           const items = sec.items.filter((t) => String(t).toLowerCase().includes(lower));
           return { ...sec, items };
@@ -498,115 +479,103 @@ export default function DanangPlannerApp() {
         return sec;
       })
       .filter((sec) =>
-        sec.places ? sec.places.length > 0 : sec.groups ? sec.groups.length > 0 : sec.items ? sec.items.length > 0 : true
+        sec.places ? sec.places.length > 0 :
+        sec.groups ? sec.groups.length > 0 :
+        sec.items ? sec.items.length > 0 : true
       );
   }, [active, q]);
 
   return (
-    <div className="min-h-screen bg-[#ececdc] text-slate-800">
-      {/* 헤더 */}
-      <header className="sticky top-0 z-30 text-white shadow-md bg-gradient-to-r from-[#d44c2c] via-[#f5c400] to-[#6c8c74] bg-[length:200%_100%]">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Calendar className="w-5 h-5 opacity-90" />
-          <h1 className="text-2xl font-extrabold tracking-tight leading-none">다낭여행총정리</h1>
-          <span className="ml-auto inline-flex items-center rounded-full bg-[#f5c400] text-[#083714] text-xs font-semibold px-2 py-1">
-            9/5(금) ~ 9/9(화)
-          </span>
+    <div>
+      {/* 헤더: element 셀렉터(header)로 index.css가 적용됨 */}
+      <header>
+        <div style={{maxWidth: 960, margin: "0 auto", padding: "12px 16px", display: "flex", alignItems: "center", gap: 8}}>
+          <Calendar size={20} style={{opacity:.9}} />
+          <h1>다낭여행총정리</h1>
+          <span style={{marginLeft: "auto"}}>9/5(금) ~ 9/9(화)</span>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+      <main style={{maxWidth: 960, margin: "0 auto", padding: "16px"}}>
         {/* 환율 계산기 */}
-        <Card className="mb-4 rounded-2xl shadow-sm border-[#ddb59a] bg-white">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-[#244c24]" /> 환율 계산기 (VND → KRW)
+        <Card className="card" style={{marginBottom: 16,paddingLeft: 10}}>
+          <CardHeader>
+            <CardTitle style={{display:"flex", alignItems:"center", gap:8}}>
+              <Calculator size={20}  /> 환율 계산기 (VND → KRW)
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div>
-              <div className="text-xs text-slate-600 mb-1">베트남 동 (VND)</div>
-              <Input
-                value={vnd}
-                onChange={(e) => setVnd(e.target.value.replace(/[^\d.]/g, ""))}
-                inputMode="decimal"
-                placeholder="예: 150000"
-                className="h-12 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
-              />
-              <div className="flex flex-wrap gap-2 mt-2">
-                {[10000, 50000, 100000, 200000].map((n) => (
-                  <button
-                    key={n}
-                    onClick={() => setVnd(String(n))}
-                    className="rounded-full h-8 px-3 text-xs border transition-colors bg-white border-[#ddb59a] text-slate-700 hover:bg-[#fdf6eb]"
-                  >
-                    {n.toLocaleString()} VND
-                  </button>
-                ))}
+          <CardContent className="card-body">
+            <div style={{display: "grid", gridTemplateColumns: "1fr", gap: 12}}>
+              <div>
+                <div style={{fontSize:12, color:"#64748b", marginBottom:4}}>베트남 동 (VND)</div>
+                <Input
+                  value={vnd}
+                  onChange={(e) => setVnd(e.target.value.replace(/[^\d.]/g, ""))}
+                  inputMode="decimal"
+                  placeholder="예: 150000"
+                />
+                <div style={{display:"flex", flexWrap:"wrap", gap:8, marginTop:8}}>
+                  {[10000, 50000, 100000, 200000].map((n) => (
+                    <button key={n} className="category-btn" onClick={() => setVnd(String(n))}>
+                      {n.toLocaleString()} VND
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="text-xs text-slate-600 mb-1">환율 (1 VND → KRW)</div>
-              <Input
-                value={rate}
-                onChange={(e) => setRate(e.target.value)}
-                inputMode="decimal"
-                placeholder="예: 0.055"
-                className="h-12 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
-              />
-              <div className="text-xs text-slate-600 mt-1">* 실제 환율로 바꾸어 사용하세요.</div>
-            </div>
-            <div>
-              <div className="text-xs text-slate-600 mb-1">결과 (KRW)</div>
-              <div className="h-12 rounded-xl border border-[#ddb59a] bg-[#fdf6eb] flex items-center px-3 text-[18px] font-semibold">
-                ₩ {fmt(krw)}
+              <div>
+                <div style={{fontSize:12, color:"#64748b", marginBottom:4}}>환율 (1 VND → KRW)</div>
+                <Input value={rate} onChange={(e) => setRate(e.target.value)} inputMode="decimal" placeholder="예: 0.055" />
+                <div style={{fontSize:12, color:"#64748b", marginTop:4}}>* 실제 환율로 바꾸어 사용하세요.</div>
               </div>
-              <div className="text-xs text-slate-600 mt-1">100,000 VND ≈ ₩ {fmt(100000 * (parseFloat(rate || "0")))}</div>
+              <div>
+                <div style={{fontSize:12, color:"#64748b", marginBottom:4}}>결과 (KRW)</div>
+                <div style={{
+                  height:48, border:"1px solid #EEC8A9", background:"#FFF7E6",
+                  display:"flex", alignItems:"center", padding:"0 12px", fontSize:18, fontWeight:700, borderRadius:12
+                }}>
+                  ₩ {fmt(krw)}
+                </div>
+                <div style={{fontSize:12, color:"#64748b", marginTop:4}}>
+                  100,000 VND ≈ ₩ {fmt(100000 * (parseFloat(rate || "0")))}
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* 전체 일정 요약 (클릭 시 펼침) */}
-        <Card className="mb-4 sm:mb-6 rounded-2xl shadow-sm border-[#ddb59a] bg-white">
-          <CardHeader className="pb-2 cursor-pointer select-none" onClick={() => setShowSummary((s) => !s)}>
-            <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-              <Info className="w-5 h-5 text-[#d44c2c]" />
-              전체 일정 요약
-              <ChevronDown className={`ml-auto w-5 h-5 transition-transform ${showSummary ? "rotate-180" : ""}`} />
+        {/* 전체 일정 요약 */}
+        <Card className="card" style={{marginBottom: 16,paddingLeft: 10,paddingRight: 10}}>
+          <CardHeader onClick={() => setShowSummary((s)=>!s)} style={{cursor:"pointer"}}>
+            <CardTitle style={{display:"flex", alignItems:"center", gap:8}}>
+              <Info size={20} /> 전체 일정 요약
+              <ChevronDown size={20} style={{marginLeft:"auto", transform: showSummary ? "rotate(180deg)" : "none", transition:"transform .2s"}} />
             </CardTitle>
           </CardHeader>
           {showSummary && (
-            <CardContent className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-2">
-              {DATA.overview.items.map((it, idx) => {
-                const Ico = ICON[it.icon] || MapPin;
-                return (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-2 rounded-2xl border border-[#ddb59a] p-3 bg-white h-20"
-                  >
-                    <Ico className="w-5 h-5 shrink-0 text-[#d44c2c]" />
-                    <div className="leading-tight">
-                      <div className="text-[11px] text-slate-500">{it.time}</div>
-                      <div className="text-sm font-medium">{it.name}</div>
-                      {it.note && <div className="text-[11px] text-slate-500">{it.note}</div>}
+            <CardContent className="card-body">
+              <div style={{display:"grid", gap:8, gridTemplateColumns:"repeat(auto-fit, minmax(240px,1fr))"}}>
+                {DATA.overview.items.map((it, idx) => {
+                  const Ico = ICON[it.icon] || MapPin;
+                  return (
+                    <div key={idx} className="summary-item">
+                      <Ico size={18} className="icon" />
+                      <div style={{lineHeight:1.1}}>
+                        <small>{it.time}</small>
+                        <div style={{fontSize:14, fontWeight:600}}>{it.name}</div>
+                        {it.note && <small>{it.note}</small>}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </CardContent>
           )}
         </Card>
 
-        {/* 검색 + 카테고리 버튼 */}
-        <div className="space-y-3 mb-4">
-          <Input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="장소/팁/입장료/쇼핑 항목 검색"
-            className="h-14 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
-          /><br></br>
-
-          <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {/* 검색 + 카테고리 */}
+        <div style={{display:"grid", gap:12, marginBottom:16}}>
+          <Input value={q} onChange={(e)=>setQ(e.target.value)} placeholder="장소/팁/입장료/쇼핑 항목 검색" />
+          <div className="category-row">
             {CATEGORIES.map((c) => (
               <button
                 key={c.id}
@@ -622,18 +591,16 @@ export default function DanangPlannerApp() {
         {/* 섹션 */}
         <AnimatePresence mode="popLayout">
           {active === "checklist" ? (
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="grid gap-4">
-              <Card className="rounded-2xl border-[#ddb59a] bg-white">
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
+              <Card className="card">
                 <CardHeader>
-                  <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-                    <ClipboardList className="w-5 h-5 text-[#244c24]" /> {DATA.checklist.title}
+                  <CardTitle style={{display:"flex", alignItems:"center", gap:8}}>
+                    <ClipboardList size={20} /> {DATA.checklist.title}
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 space-y-1 text-[15px]">
-                    {DATA.checklist.items.map((t, i) => (
-                      <li key={i}>{highlight(t, q)}</li>
-                    ))}
+                <CardContent className="card-body checklist">
+                  <ul>
+                    {DATA.checklist.items.map((t,i)=>(<li key={i}>{highlight(t,q)}</li>))}
                   </ul>
                 </CardContent>
               </Card>
@@ -642,29 +609,25 @@ export default function DanangPlannerApp() {
             visibleSections.map((section) => {
               const Ico = ICON[section.icon] || MapPin;
 
-              /* ===== 쇼핑리스트(구매처별 아코디언) ===== */
+              /* 쇼핑리스트 (구매처별 아코디언) */
               if (section.groups) {
                 return (
-                  <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mb-5">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Ico className="w-5 h-5 text-[#244c24]" />
-                      <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
-                      <Badge className="ml-1 bg-[#f5c400]/70 text-[#083714] border border-[#ddb59a]">{section.category}</Badge>
+                  <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} style={{marginBottom:20}}>
+                    <div className="section-head">
+                      <Ico size={20} color="#244c24" />
+                      <h2 className="section-title">{section.title}</h2>
+                      <span className="section-badge">{section.category}</span>
                     </div>
 
-                    <Card className="rounded-2xl shadow-sm border-[#ddb59a] bg-white">
-                      <CardContent className="py-2">
+                    <Card className="card">
+                      <CardContent className="card-body" style={{paddingTop:8}}>
                         <Accordion type="multiple" collapsible>
                           {section.groups.map((g, gi) => (
                             <AccordionItem key={gi} value={`group-${gi}`}>
-                              <AccordionTrigger className="text-base font-semibold px-4 py-3 data-[state=open]:bg-[#fdf6eb] rounded-xl">
-                                {g.title}
-                              </AccordionTrigger>
-                              <AccordionContent className="pt-2 px-1">
-                                <ul className="list-disc pl-6 space-y-1 text-sm">
-                                  {g.items.map((it, ii) => (
-                                    <li key={ii}>{highlight(it, q)}</li>
-                                  ))}
+                              <AccordionTrigger className="accordion-trigger">{g.title}</AccordionTrigger>
+                              <AccordionContent className="accordion-content">
+                                <ul style={{listStyle:"disc", paddingLeft:24}}>
+                                  {g.items.map((it, ii) => <li key={ii}>{highlight(it, q)}</li>)}
                                 </ul>
                               </AccordionContent>
                             </AccordionItem>
@@ -676,113 +639,87 @@ export default function DanangPlannerApp() {
                 );
               }
 
-              /* ===== 그랩 팁 / 주의사항 (제목 굵게 + 본문 작게) ===== */
+              /* 그랩 팁 / 주의사항 (index.css 클래스 사용) */
               if (section.items) {
                 return (
-                  <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mb-5">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Ico className="w-5 h-5 text-[#244c24]" />
-                      <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
-                      <Badge className="ml-1 bg-[#f5c400]/70 text-[#083714] border border-[#ddb59a]">{section.category}</Badge>
+                  <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} style={{marginBottom:20}}>
+                    <div className="section-head">
+                      <Ico size={20} color="#244c24" />
+                      <h2 className="section-title">{section.title}</h2>
+                      <span className="section-badge">{section.category}</span>
                     </div>
 
-                    <Card className="rounded-2xl shadow-sm border-[#ddb59a] bg-white">
-                      <CardContent className="py-4 space-y-3">
-                        {section.items.map((t, i) => {
-                          const isHeading =
-                            !t.startsWith("• ") &&
-                            (t.startsWith("🚖") ||
-                              t.startsWith("🚨") ||
-                              t.startsWith("💳") ||
-                              t.startsWith("✅") ||
-                              t.startsWith("✈️") ||
-                              t.startsWith("🍔") ||
-                              t.startsWith("❓") ||
-                              t.startsWith("🚕") ||
-                              t.startsWith("💵") ||
-                              t.startsWith("🛵") ||
-                              t.startsWith("🚲") ||
-                              t.startsWith("🥶") ||
-                              t.startsWith("🎒") ||
-                              t.startsWith("🙅") ||
-                              t.startsWith("💁") ||
-                              t.startsWith("🛍") ||
-                              t.startsWith("📞"));
-                          return isHeading ? (
-                            <div key={i} className="text-base sm:text-lg font-bold text-slate-800 pt-1">
-                              {highlight(t, q)}
-                            </div>
-                          ) : (
-                            <div key={i} className="text-sm text-slate-700 pl-4 leading-relaxed">
-                              {highlight(t.replace(/^•\s*/, "• "), q)}
-                            </div>
-                          );
-                        })}
+                    <Card className="card">
+                      <CardContent className="card-body">
+                        <div className="bullet-block">
+                          {section.items.map((t, i) => {
+                            const isHeading =
+                              !t.startsWith("• ") &&
+                              (t.startsWith("🚖") || t.startsWith("🚨") || t.startsWith("💳") || t.startsWith("✅") ||
+                               t.startsWith("✈️") || t.startsWith("🍔") || t.startsWith("❓") || t.startsWith("🚕") ||
+                               t.startsWith("💵") || t.startsWith("🛵") || t.startsWith("🚲") || t.startsWith("🥶") ||
+                               t.startsWith("🎒") || t.startsWith("🙅") || t.startsWith("💁") || t.startsWith("🛍") ||
+                               t.startsWith("📞"));
+                            return isHeading ? (
+                              <div key={i} className="bullet-heading">{highlight(t, q)}</div>
+                            ) : (
+                              <div key={i} className="bullet-item">{highlight(t.replace(/^•\s*/, "• "), q)}</div>
+                            );
+                          })}
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.section>
                 );
               }
 
-              /* ===== places 타입(Day들) ===== */
+              /* DAY 섹션 */
               return (
-                <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mb-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Ico className="w-5 h-5 text-[#244c24]" />
-                    <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
-                    <Badge className="ml-1 bg-[#f5c400]/70 text-[#083714] border border-[#ddb59a]">{section.category}</Badge>
+                <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} style={{marginBottom:20}}>
+                  <div className="section-head">
+                    <Ico size={20} color="#244c24" />
+                    <h2 className="section-title">{section.title}</h2>
+                    <span className="section-badge">{section.category}</span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div style={{display:"grid", gap:12, gridTemplateColumns:"repeat(auto-fit, minmax(280px,1fr))"}}>
                     {section.places.map((p, idx) => (
-                      <Card key={idx} className="rounded-2xl shadow-sm border-[#ddb59a] bg-white">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-[#d44c2c]" /> {highlight(p.name, q)}
+                      <Card key={idx} className="card">
+                        <CardHeader  className="card-header"style={{paddingBottom:8}}>
+                          <CardTitle style={{display:"flex", alignItems:"center", gap:8, fontSize:16}}>
+                            <MapPin size={16} color="#d44c2c" /> {highlight(p.name, q)}
                           </CardTitle>
-                          <div className="text-xs text-slate-500">{p.address}</div>
+                          <div style={{fontSize:12, color:"#6b7280"}}>{p.address}</div>
                         </CardHeader>
-                        <CardContent>
-                          <Accordion type="single" collapsible className="w-full">
+                        <CardContent className="card-body">
+                          <Accordion type="single" collapsible>
                             <AccordionItem value="fee">
-                              <AccordionTrigger className="appearance-none rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
-                                입장료 / 비용
-                              </AccordionTrigger>
-                              <AccordionContent className="pt-2">
+                              <AccordionTrigger className="accordion-trigger">입장료 / 비용</AccordionTrigger>
+                              <AccordionContent className="accordion-content">
                                 {Array.isArray(p.info.입장료) ? (
-                                  <ul className="list-disc pl-5 space-y-1 text-[15px]">
-                                    {p.info.입장료.map((f, i) => (
-                                      <li key={i}>{highlight(f, q)}</li>
-                                    ))}
+                                  <ul style={{listStyle:"disc", paddingLeft:20}}>
+                                    {p.info.입장료.map((f, i) => <li key={i}>{highlight(f, q)}</li>)}
                                   </ul>
                                 ) : (
-                                  <p className="text-[15px]">{highlight(p.info.입장료 || "해당 없음", q)}</p>
+                                  <p>{highlight(p.info.입장료 || "해당 없음", q)}</p>
                                 )}
                               </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="tips">
-                              <AccordionTrigger className="appearance-none mt-2 rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
-                                팁
-                              </AccordionTrigger>
-                              <AccordionContent className="pt-2">
-                                <ul className="list-disc pl-5 space-y-1 text-[15px]">
-                                  {p.info.팁.map((t, i) => (
-                                    <li key={i}>{highlight(t, q)}</li>
-                                  ))}
+                              <AccordionTrigger className="accordion-trigger">팁</AccordionTrigger>
+                              <AccordionContent className="accordion-content">
+                                <ul style={{listStyle:"disc", paddingLeft:20}}>
+                                  {p.info.팁.map((t, i) => <li key={i}>{highlight(t, q)}</li>)}
                                 </ul>
                               </AccordionContent>
                             </AccordionItem>
 
                             <AccordionItem value="pack">
-                              <AccordionTrigger className="appearance-none mt-2 rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
-                                챙길 것
-                              </AccordionTrigger>
-                              <AccordionContent className="pt-2">
-                                <ul className="list-disc pl-5 space-y-1 text-[15px]">
-                                  {p.info.챙길것.map((t, i) => (
-                                    <li key={i}>{highlight(t, q)}</li>
-                                  ))}
+                              <AccordionTrigger className="accordion-trigger">챙길 것</AccordionTrigger>
+                              <AccordionContent className="accordion-content">
+                                <ul style={{listStyle:"disc", paddingLeft:20}}>
+                                  {p.info.챙길것.map((t, i) => <li key={i}>{highlight(t, q)}</li>)}
                                 </ul>
                               </AccordionContent>
                             </AccordionItem>
@@ -798,31 +735,24 @@ export default function DanangPlannerApp() {
         </AnimatePresence>
 
         {/* 푸터 */}
-        <div className="mt-8 sm:mt-10 grid gap-3 sm:flex sm:items-center sm:justify-between">
-          <div className="text-sm text-slate-600">
+        <div style={{marginTop:24, display:"grid", gap:12, gridTemplateColumns:"1fr auto"}}>
+          <div className="footer-note">
             ※ 금액/운영 정보는 현지 사정에 따라 변동될 수 있어요. 최신 정보는 현지 매표소/공식 채널을 확인하세요.
           </div>
-          <div className="flex gap-2">
+          <div style={{display:"flex", gap:8}}>
             <Dialog>
               <DialogTrigger asChild>
-                <button className="rounded-full bg-white border border-[#ddb59a] text-slate-700 hover:bg-[#fdf6eb] h-10 px-4">
-                  공유/내보내기
-                </button>
+                <button className="footer-btn">공유/내보내기</button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[420px]">
-                <DialogHeader>
-                  <DialogTitle>공유/내보내기</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-2 text-sm text-slate-600">
+              <DialogContent>
+                <DialogHeader><DialogTitle>공유/내보내기</DialogTitle></DialogHeader>
+                <div className="footer-note">
                   <p>• 이 페이지 URL을 복사해 가족과 공유하세요.</p>
                   <p>• 인쇄 시 브라우저 인쇄(CTRL/CMD+P)를 사용하면 깔끔한 PDF가 나옵니다.</p>
                 </div>
               </DialogContent>
             </Dialog>
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="rounded-full bg-[#d44c2c] hover:bg-[#c74325] h-10 px-4 text-white"
-            >
+            <button className="footer-btn primary" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
               맨 위로
             </button>
           </div>
