@@ -1,19 +1,170 @@
-/* src/index.css */
-
-/* Tailwind core */
+/* ---------------------- */
+/* Tailwind core imports  */
+/* ---------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 프로젝트 공통 베이스 */
-@layer base {
-  :root { --radius: 12px; }
-  html, body {
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* ---------------------- */
+/* 기본 레이아웃 & 글꼴   */
+/* ---------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFF7ED; /* 전체 배경 */
+  color: #1e293b; /* slate-800 */
 }
 
-/* (선택) 얇은 하이라이트 */
-mark { border-radius: 2px; padding: 0 2px; }
+/* ---------------------- */
+/* 헤더 스타일             */
+/* ---------------------- */
+header {
+  background: linear-gradient(to right, #DA251D, #F46E2B); /* 베트남 느낌 그라데이션 */
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+}
+header span {
+  background-color: #FFDD00;
+  color: #7A1B16;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+/* ---------------------- */
+/* 카드 기본               */
+/* ---------------------- */
+.card, .card * {
+  box-sizing: border-box;
+}
+.card {
+  background: #ffffff;
+  border: 1px solid #F2D9C4;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* 일정 요약 카드 아이템 */
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 80px;
+  padding: 0.75rem;
+  border: 1px solid #F2D9C4;
+  border-radius: 16px;
+  background: white;
+}
+.summary-item small {
+  font-size: 11px;
+  color: #6b7280;
+}
+.summary-item .icon {
+  color: #C83C2B;
+}
+
+/* ---------------------- */
+/* 인풋, 버튼              */
+/* ---------------------- */
+input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #EEC8A9;
+  border-radius: 12px;
+  padding: 0 1rem;
+  font-size: 15px;
+  outline: none;
+}
+input:focus {
+  border-color: #DA251D;
+  box-shadow: 0 0 0 3px rgba(218,37,29,0.2);
+}
+
+/* 카테고리 버튼 (pill) */
+.category-btn {
+  border-radius: 9999px;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+  border: 1px solid #F2D9C4;
+  background: white;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+.category-btn.active {
+  background: #DA251D;
+  border-color: #DA251D;
+  color: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* ---------------------- */
+/* 아코디언 (Accordion)   */
+/* ---------------------- */
+.accordion-trigger {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border: 1px solid #F2D9C4;
+  border-radius: 12px;
+  background: white;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.accordion-trigger:hover {
+  background: #FFF1D6;
+}
+.accordion-content {
+  padding: 8px 16px;
+  font-size: 15px;
+}
+
+/* ---------------------- */
+/* 체크리스트              */
+/* ---------------------- */
+.checklist ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 15px;
+}
+.checklist li {
+  margin-bottom: 4px;
+}
+
+/* ---------------------- */
+/* 푸터 도구 모음          */
+/* ---------------------- */
+.footer-note {
+  font-size: 14px;
+  color: #6b7280;
+}
+.footer-btn {
+  border-radius: 9999px;
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  border: 1px solid #F2D9C4;
+  background: white;
+  color: #374151;
+}
+.footer-btn.primary {
+  background: #DA251D;
+  border-color: #DA251D;
+  color: white;
+}
+.footer-btn:hover {
+  opacity: 0.9;
+}

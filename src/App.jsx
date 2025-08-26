@@ -5,11 +5,26 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { MapPin, Plane, Mountain, Ship, Landmark, ClipboardList, Calendar, Info, MountainSnow } from "lucide-react";
+import {
+  MapPin,
+  Plane,
+  Mountain,
+  Ship,
+  Landmark,
+  ClipboardList,
+  Calendar,
+  Info,
+  MountainSnow,
+  Calculator,
+  ChevronDown,
+  ShoppingBag,
+  Car,
+  AlertTriangle,
+} from "lucide-react";
 
-// ------------------------------------------------------------
-// 데이터 (한국어)
-// ------------------------------------------------------------
+/* =========================
+   데이터 (한국어)
+   ========================= */
 const DATA = {
   overview: {
     title: "전체 일정",
@@ -25,6 +40,7 @@ const DATA = {
     ],
   },
   sections: [
+    /* ------------------- DAY 섹션 ------------------- */
     {
       id: "day1",
       category: "DAY 1",
@@ -100,10 +116,7 @@ const DATA = {
           address: "Hoi An",
           info: {
             입장료: "패키지 요금에 포함 (쿠킹클래스/점심/발마사지)",
-            팁: [
-              "로컬 마켓 쇼핑 시 흥정/소매치기 주의",
-              "날씨 덥고 습함 → 수분/휴식",
-            ],
+            팁: ["로컬 마켓 쇼핑 시 흥정/소매치기 주의", "날씨 덥고 습함 → 수분/휴식"],
             챙길것: ["현지화폐", "여벌 옷", "모자/선크림", "물"],
           },
         },
@@ -155,27 +168,15 @@ const DATA = {
           name: "오행산 (Marble Mountains)",
           address: "Da Nang",
           info: {
-            입장료: [
-              "입장 40,000 VND (10세 미만 무료)",
-              "엘리베이터 15,000 VND(편도)",
-              "암부동(Am Phu) 동굴 20,000 VND",
-            ],
-            팁: [
-              "운영 07:00~17:30 (2시간 여유 권장)",
-              "대리석 바닥 미끄럼 주의 → 운동화 필수",
-              "엘리베이터로 상행, 계단 하행 추천",
-            ],
+            입장료: ["입장 40,000 VND (10세 미만 무료)", "엘리베이터 15,000 VND(편도)", "암부동(Am Phu) 동굴 20,000 VND"],
+            팁: ["운영 07:00~17:30 (2시간 여유 권장)", "대리석 바닥 미끄럼 주의 → 운동화 필수", "엘리베이터로 상행, 계단 하행 추천"],
             챙길것: ["운동화", "물/모자/선크림", "현금 소액", "작은 배낭"],
           },
         },
         {
           name: "허벌 부티크 스파",
           address: "미케/논느억 비치 인근",
-          info: {
-            입장료: "시술 비용 별도",
-            팁: ["미리 예약, 이동 동선 고려"],
-            챙길것: ["예약확인", "갈아입을 옷", "팁 소액"],
-          },
+          info: { 입장료: "시술 비용 별도", 팁: ["미리 예약, 이동 동선 고려"], 챙길것: ["예약확인", "갈아입을 옷", "팁 소액"] },
         },
         {
           name: "선짜 야시장 / 빈원더스 사우스 호이안",
@@ -197,21 +198,186 @@ const DATA = {
         {
           name: "다낭 대성당",
           address: "Da Nang City",
-          info: {
-            입장료: "무료",
-            팁: ["예배 시간/내부 촬영 매너 준수"],
-            챙길것: ["카메라", "조용한 복장"],
-          },
+          info: { 입장료: "무료", 팁: ["예배 시간/내부 촬영 매너 준수"], 챙길것: ["카메라", "조용한 복장"] },
         },
         {
           name: "롯데마트 다낭점",
           address: "Da Nang City",
-          info: {
-            입장료: "무료 (구매비 별도)",
-            팁: ["커피/과자 등 기념품 쇼핑 적합"],
-            챙길것: ["여분 캐리어 공간", "카드/현금", "쇼핑 리스트"],
-          },
+          info: { 입장료: "무료 (구매비 별도)", 팁: ["커피/과자 등 기념품 쇼핑 적합"], 챙길것: ["여분 캐리어 공간", "카드/현금", "쇼핑 리스트"] },
         },
+      ],
+    },
+
+    /* ------------------- 새 카테고리 ------------------- */
+    {
+      id: "shopping",
+      category: "쇼핑리스트",
+      icon: "shopping",
+      title: "베트남 쇼핑리스트",
+      items: [
+        "🛒 롯데마트",
+        "〈스낵류〉",
+        "코코넛크래커",
+        "Ahh 치즈과자",
+        "an 쌀과자",
+        "체리쉬 (망고 푸딩)",
+        "탑젤리 (망고 젤리)",
+        "케오데오 (까먹는 젤리)",
+        "곰과자",
+        "옥수수과자",
+        "해바라기씨",
+        "커피조이",
+        "골든팜 과일청",
+        "커피맛 초콜릿",
+        "〈양념/조미료류〉",
+        "새우소금",
+        "후추",
+        "꿀",
+        "연유",
+        "간장",
+        "칠리소스",
+        "〈기타〉",
+        "깐껍질 캐슈넛",
+        "새우라면",
+        "신라면 치즈볶음면",
+        "베트남 보드카",
+        "치약",
+        "쿨샐리더",
+    
+        "🎁 기념품샵 (엘스토어)",
+        "망고커피",
+        "위즐커피",
+        "코코넛커피",
+        "말린과일",
+        "망고 초콜릿",
+        "마카다미아",
+        "코코넛칩",
+        "꽃차",
+    
+        "🏮 한시장 & 야시장",
+        "크록스 (지니폼 신발류)",
+        "원피스",
+        "하와이안셔츠",
+        "나이키/짝퉁 옷",
+        "라탄백",
+        "뜨개모자",
+        "거북이 줄자",
+        "캐리어",
+        "카피바라 인형",
+    
+        "💊 약국",
+        "스트렙실 (목 캔디)",
+        "타이거밤 (근육통 연고)",
+        "베로카 발포비타민",
+        "소펠 모기퇴치제",
+        "아티소 (간 영양제)",
+        "비판텐 (화상·손상 크림)",
+        "비나가 (위장약)",
+        "비아틴 (선번·화상 크림)",
+        "피나돌 (진통제)",
+        "URGO (방수 밴드)",
+        "사론파스 (파스)",
+        "카네스텐 (피부 연고)",
+      ],
+    },
+    {
+      id: "grab",
+      category: "그랩 팁",
+      icon: "ship",
+      title: "그랩 이용 팁",
+      items: [
+        "🚖 그랩 할인 방법",
+        "• 그랩 쿠폰 활용 – 여행 기간 동안 누적 사용 시 10만 원 이상 절약 가능",
+        "• 쿠폰 사용으로 2~3만 원 절약 가능",
+        "• 가족/일행 모두 가입해서 쿠폰 소진 추천",
+    
+        "💳 트래블 패스 (강추)",
+        "• 여행자 전용 구독형 할인 (베트남 기준 18,000동, 약 900원)",
+        "• 택시 & 배달 할인 모두 적용되어 경제적",
+    
+        "✅ 슬기롭게 그랩 타기",
+        "• 목적지 방향에서 호출해야 요금 절약",
+        "• 차량번호 & 기사님 사진 반드시 확인",
+        "• 지도 경로와 실제 경로 일치 여부 확인",
+        "• 우발 상황 시 안전센터 버튼으로 고객센터/경찰 신고 가능",
+    
+        "✈️ 공항 픽업 서비스 예약",
+        "• 도착 항공편 입력 시 자동 시간 조정",
+        "• 요금 고정, 공항 내 픽업존에서 탑승",
+        "• 개인적으로는 그랩존 활성화 여부 확인 필요",
+    
+        "🍔 그랩 배달 추천",
+        "• 여행 중 최소 1회 시켜먹기 강추",
+        "• 리조트에서도 편하게 식사 가능",
+        "• 음식 퀄리티 & 양 만족도 높음",
+    
+        "❓ 그랩 Q&A",
+        "• 콜 취소 시 환불: 30분 내 처리",
+        "• 해외 결제 수수료: 약 4%",
+        "• 팀 이용: 목적지 도착 후 팀 못 찾으면 그냥 하차 가능",
+        "• 'Currently on Hold': 예약 완료지만 아직 배차 확정 아님",
+      ],
+    },
+    {
+      id: "warning",
+      category: "주의사항",
+      icon: "info",
+      title: "베트남 여행 시 주의사항 Top 10",
+      items: [
+        "🚨 공항 그랩 사칭 주의",
+        "• '내가 그랩이야, 더 싸게 해줄게요' → 바가지 요금 사례 많음",
+        "• 반드시 앱 호출 + 차량 번호 일치 확인",
+    
+        "🚕 택시 바가지 & 미터기 조작",
+        "• 미터기 조작, 잔돈 누락, 흥정 사기 빈번",
+        "• 그랩 앱 + 카드 결제로 안전하게 이용",
+    
+        "💵 화폐 단위 & 잔돈 사기",
+        "• 20,000동과 500,000동 색상 유사 → 착각 유발",
+        "• 직접 확인하며 소액권 사용하기",
+    
+        "🛵 오토바이 렌트 주의",
+        "• 국제면허 없으면 불법, 단속 시 벌금 + 계좌이체 요구 사례",
+        "• 분실 사고 많으므로 주차 필수 확인",
+    
+        "🚲 시클로(자전거 택시) 사기",
+        "• 약속한 금액보다 과도한 요금 요구",
+        "• 외진 곳으로 끌고 가 협박 사례 → 혼자 탑승 금지",
+        "• 반드시 가격 확정 및 기록 필수",
+    
+        "🥶 얼음 & 수돗물 조심",
+        "• 물갈이로 고생 사례 많음",
+        "• 공장제 얼음 피하고, 아이스버킷 요청하기",
+    
+        "🎒 소매치기 & 가방 낚아채기",
+        "• 오토바이 절도 사례 존재",
+        "• 가방은 앞쪽, 휴대폰은 손에 들지 말기",
+    
+        "🙅‍♂️ 낯선 호의 = 사기 가능성",
+        "• '사진 찍어줄게요' → 폰 도난",
+        "• '이거 체험해봐요' → 돈 요구",
+        "• 친절은 경계 필요",
+    
+        "💁‍♂️ 팁 문화 오해",
+        "• 의무 아님, 만족했을 때만 주기",
+        "• 마사지/레스토랑은 포함 여부 확인",
+    
+        "🛍️ 시장·야시장 바가지",
+        "• 터무니없이 비싼 가격 제시 → 흥정 필수",
+        "• 사전 검색, 계산기 사용, 잔돈 확인하기",
+    
+        "📞 긴급 연락처",
+        "• 경찰: 113",
+        "• 응급 병원: 115",
+        "• 소방: 114",
+        "• 주 베트남 한국 대사관(하노이): +84-24-3831-5110",
+        "• 주 호치민 총영사관: +84-28-3824-8531",
+        "• 영사콜센터(24시간): +82-2-3210-0404",
+    
+        "✅ 핵심 팁",
+        "• 지갑은 두 개로 분산 보관",
+        "• 얼음·수돗물 피하기",
+        "• 낯선 친절은 한번 더 의심하기",
       ],
     },
   ],
@@ -229,16 +395,19 @@ const DATA = {
   },
 };
 
-// 아이콘 매핑
+/* 아이콘 매핑 */
 const ICON = {
   plane: Plane,
   mountain: Mountain,
   ship: Ship,
   landmark: Landmark,
   mountainSnow: MountainSnow,
+  shopping: ShoppingBag,
+  grab: Car,
+  warning: AlertTriangle,
 };
 
-// 카테고리 버튼 정의
+/* 카테고리 버튼 */
 const CATEGORIES = [
   { id: "all", label: "전체" },
   { id: "day1", label: "Day 1" },
@@ -246,10 +415,13 @@ const CATEGORIES = [
   { id: "day3-hoian", label: "Day 3" },
   { id: "day4-marble", label: "Day 4" },
   { id: "day5-end", label: "Day 5" },
+  { id: "shopping", label: "쇼핑리스트" },
+  { id: "grab", label: "그랩 팁" },
+  { id: "warning", label: "주의사항" },
   { id: "checklist", label: "체크리스트" },
 ];
 
-// 유틸: 텍스트 하이라이트
+/* 유틸 */
 function highlight(text, q) {
   if (!q) return text;
   const idx = text.toLowerCase().indexOf(q.toLowerCase());
@@ -257,88 +429,165 @@ function highlight(text, q) {
   return (
     <>
       {text.slice(0, idx)}
-      <mark className="px-0.5 rounded bg-[#FFDD00]/40">{text.slice(idx, idx + q.length)}</mark>
+      <mark className="px-0.5 rounded bg-[#f5c400]/40">{text.slice(idx, idx + q.length)}</mark>
       {text.slice(idx + q.length)}
     </>
   );
 }
+const fmt = (n) => (isFinite(n) ? Math.round(n).toLocaleString("ko-KR") : "-");
 
+/* =========================
+   컴포넌트
+   ========================= */
 export default function DanangPlannerApp() {
   const [active, setActive] = useState("all");
   const [q, setQ] = useState("");
 
+  // 환율 계산기 상태
+  const [vnd, setVnd] = useState("");
+  const [rate, setRate] = useState(0.055); // 1 VND → KRW (대략값)
+  const krw = useMemo(() => parseFloat(vnd || "0") * parseFloat(rate || "0"), [vnd, rate]);
+
+  // 전체 일정 요약 토글 (기본: 접힘)
+  const [showSummary, setShowSummary] = useState(false);
+
   const visibleSections = useMemo(() => {
     const all = DATA.sections;
     const filtered = active === "all" ? all : all.filter((s) => s.id === active);
+
     if (!q) return filtered;
+
     const lower = q.toLowerCase();
     return filtered
-      .map((sec) => ({
-        ...sec,
-        places: sec.places.filter((p) => {
-          const hay = [
-            p.name,
-            ...(Array.isArray(p.info?.입장료) ? p.info.입장료 : [p.info?.입장료 || ""]),
-            ...(p.info?.팁 || []),
-            ...(p.info?.챙길것 || []),
-          ]
-            .filter(Boolean)
-            .join(" \n ")
-            .toLowerCase();
-          return hay.includes(lower);
-        }),
-      }))
-      .filter((sec) => sec.places.length > 0);
+      .map((sec) => {
+        // Day/일반 섹션 (places) 필터
+        if (sec.places) {
+          const places = sec.places.filter((p) => {
+            const hay = [
+              p.name,
+              ...(Array.isArray(p.info?.입장료) ? p.info.입장료 : [p.info?.입장료 || ""]),
+              ...(p.info?.팁 || []),
+              ...(p.info?.챙길것 || []),
+            ]
+              .filter(Boolean)
+              .join(" \n ")
+              .toLowerCase();
+            return hay.includes(lower);
+          });
+          return { ...sec, places };
+        }
+        // 새/체크 섹션 (items) 필터
+        if (sec.items) {
+          const items = sec.items.filter((t) => String(t).toLowerCase().includes(lower));
+          return { ...sec, items };
+        }
+        return sec;
+      })
+      .filter((sec) => (sec.places ? sec.places.length > 0 : sec.items ? sec.items.length > 0 : true));
   }, [active, q]);
 
   return (
-    <div className="min-h-screen bg-[#FFF7ED] text-slate-800">
-      {/* 상단 헤더 */}
-      <header className="sticky top-0 z-30 bg-gradient-to-r from-[#DA251D] to-[#F46E2B] text-white shadow-md">
+    <div className="min-h-screen bg-[#ececdc] text-slate-800">
+      {/* 헤더 */}
+      <header className="sticky top-0 z-30 text-white shadow-md bg-gradient-to-r from-[#d44c2c] via-[#f5c400] to-[#6c8c74] bg-[length:200%_100%]">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
           <Calendar className="w-5 h-5 opacity-90" />
           <h1 className="text-2xl font-extrabold tracking-tight leading-none">다낭여행총정리</h1>
-          <span className="ml-auto inline-flex items-center rounded-full bg-[#FFDD00] text-[#7A1B16] text-xs font-semibold px-2 py-1">
+          <span className="ml-auto inline-flex items-center rounded-full bg-[#f5c400] text-[#083714] text-xs font-semibold px-2 py-1">
             9/5(금) ~ 9/9(화)
           </span>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
-        {/* 전체 일정 요약 카드 */}
-        <Card className="mb-4 sm:mb-6 rounded-2xl shadow-sm border-[#F2D9C4] bg-white/95">
+        {/* 환율 계산기 */}
+        <Card className="mb-4 rounded-2xl shadow-sm border-[#ddb59a] bg-white">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-              <Info className="w-5 h-5 text-[#C83C2B]" /> 전체 일정 요약
+              <Calculator className="w-5 h-5 text-[#244c24]" /> 환율 계산기 (VND → KRW)
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-2">
-            {DATA.overview.items.map((it, idx) => {
-              const Ico = ICON[it.icon] || MapPin;
-              return (
-                <div
-                  key={idx}
-                  className="flex items-center gap-2 rounded-2xl border border-[#F2D9C4] p-3 bg-white h-20"
-                >
-                  <Ico className="w-5 h-5 shrink-0 text-[#C83C2B]" />
-                  <div className="leading-tight">
-                    <div className="text-[11px] text-slate-500">{it.time}</div>
-                    <div className="text-sm font-medium">{it.name}</div>
-                    {it.note && <div className="text-[11px] text-slate-500">{it.note}</div>}
-                  </div>
-                </div>
-              );
-            })}
+          <CardContent className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <div className="text-xs text-slate-600 mb-1">베트남 동 (VND)</div>
+              <Input
+                value={vnd}
+                onChange={(e) => setVnd(e.target.value.replace(/[^\d.]/g, ""))}
+                inputMode="decimal"
+                placeholder="예: 150000"
+                className="h-12 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
+              />
+              <div className="flex flex-wrap gap-2 mt-2">
+                {[10000, 50000, 100000, 200000].map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => setVnd(String(n))}
+                    className="rounded-full h-8 px-3 text-xs border transition-colors bg-white border-[#ddb59a] text-slate-700 hover:bg-[#fdf6eb]"
+                  >
+                    {n.toLocaleString()} VND
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs text-slate-600 mb-1">환율 (1 VND → KRW)</div>
+              <Input
+                value={rate}
+                onChange={(e) => setRate(e.target.value)}
+                inputMode="decimal"
+                placeholder="예: 0.055"
+                className="h-12 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
+              />
+              <div className="text-xs text-slate-600 mt-1">* 실제 환율로 바꾸어 사용하세요.</div>
+            </div>
+            <div>
+              <div className="text-xs text-slate-600 mb-1">결과 (KRW)</div>
+              <div className="h-12 rounded-xl border border-[#ddb59a] bg-[#fdf6eb] flex items-center px-3 text-[18px] font-semibold">
+                ₩ {fmt(krw)}
+              </div>
+              <div className="text-xs text-slate-600 mt-1">100,000 VND ≈ ₩ {fmt(100000 * (parseFloat(rate || "0")))}</div>
+            </div>
           </CardContent>
         </Card>
 
-        {/* 검색 + 카테고리 pill bar */}
+        {/* 전체 일정 요약 (클릭 시 펼침) */}
+        <Card className="mb-4 sm:mb-6 rounded-2xl shadow-sm border-[#ddb59a] bg-white">
+          <CardHeader className="pb-2 cursor-pointer select-none" onClick={() => setShowSummary((s) => !s)}>
+            <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
+              <Info className="w-5 h-5 text-[#d44c2c]" />
+              전체 일정 요약
+              <ChevronDown className={`ml-auto w-5 h-5 transition-transform ${showSummary ? "rotate-180" : ""}`} />
+            </CardTitle>
+          </CardHeader>
+          {showSummary && (
+            <CardContent className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-2">
+              {DATA.overview.items.map((it, idx) => {
+                const Ico = ICON[it.icon] || MapPin;
+                return (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 rounded-2xl border border-[#ddb59a] p-3 bg-white h-20"
+                  >
+                    <Ico className="w-5 h-5 shrink-0 text-[#d44c2c]" />
+                    <div className="leading-tight">
+                      <div className="text-[11px] text-slate-500">{it.time}</div>
+                      <div className="text-sm font-medium">{it.name}</div>
+                      {it.note && <div className="text-[11px] text-slate-500">{it.note}</div>}
+                    </div>
+                  </div>
+                );
+              })}
+            </CardContent>
+          )}
+        </Card>
+
+        {/* 검색 + 카테고리 버튼 */}
         <div className="space-y-3 mb-4">
           <Input
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="장소/팁/입장료 검색"
-            className="h-14 rounded-xl text-[15px] border-[#EEC8A9] focus-visible:ring-[#DA251D]"
+            className="h-14 rounded-xl text-[15px] border-[#ddb59a] focus-visible:ring-[#d44c2c]"
           />
 
           <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -347,10 +596,10 @@ export default function DanangPlannerApp() {
                 key={c.id}
                 onClick={() => setActive(c.id)}
                 className={
-                  "shrink-0 rounded-full h-9 px-4 text-sm border transition-colors " +
+                  "appearance-none inline-flex items-center justify-center shrink-0 rounded-full h-9 px-4 text-sm border transition-colors " +
                   (active === c.id
-                    ? "bg-[#DA251D] border-[#DA251D] text-white shadow"
-                    : "bg-white border-[#F2D9C4] text-slate-700")
+                    ? "bg-[#d44c2c] border-[#d44c2c] text-white shadow hover:bg-[#c74325]"
+                    : "bg-white border-[#ddb59a] text-slate-700 hover:bg-[#fdf6eb]")
                 }
               >
                 {c.label}
@@ -359,19 +608,14 @@ export default function DanangPlannerApp() {
           </div>
         </div>
 
-        {/* 섹션 렌더 */}
+        {/* 섹션 */}
         <AnimatePresence mode="popLayout">
           {active === "checklist" ? (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="grid gap-4"
-            >
-              <Card className="rounded-2xl border-[#F2D9C4]">
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="grid gap-4">
+              <Card className="rounded-2xl border-[#ddb59a] bg-white">
                 <CardHeader>
                   <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-                    <ClipboardList className="w-5 h-5 text-[#C83C2B]" /> {DATA.checklist.title}
+                    <ClipboardList className="w-5 h-5 text-[#244c24]" /> {DATA.checklist.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -386,33 +630,54 @@ export default function DanangPlannerApp() {
           ) : (
             visibleSections.map((section) => {
               const Ico = ICON[section.icon] || MapPin;
+
+              // items 타입(쇼핑/그랩/주의)
+              if (section.items) {
+                return (
+                  <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mb-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Ico className="w-5 h-5 text-[#244c24]" />
+                      <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
+                      <Badge className="ml-1 bg-[#f5c400]/70 text-[#083714] border border-[#ddb59a]">{section.category}</Badge>
+                    </div>
+
+                    <Card className="rounded-2xl shadow-sm border-[#ddb59a] bg-white">
+                      <CardContent className="py-4">
+                        <ul className="list-disc pl-5 space-y-1 text-[15px]">
+                          {section.items.map((t, i) => (
+                            <li key={i}>{highlight(t, q)}</li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </motion.section>
+                );
+              }
+
+              // places 타입(Day들)
               return (
-                <motion.section
-                  key={section.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  className="mb-5"
-                >
+                <motion.section key={section.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mb-5">
                   <div className="flex items-center gap-2 mb-3">
-                    <Ico className="w-5 h-5 text-[#C83C2B]" />
+                    <Ico className="w-5 h-5 text-[#244c24]" />
                     <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{section.title}</h2>
-                    <Badge className="ml-1 bg-[#FFDD00]/60 text-[#7A1B16] border border-[#F2D9C4]">{section.category}</Badge>
+                    <Badge className="ml-1 bg-[#f5c400]/70 text-[#083714] border border-[#ddb59a]">{section.category}</Badge>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {section.places.map((p, idx) => (
-                      <Card key={idx} className="rounded-2xl shadow-sm border-[#F2D9C4]">
+                      <Card key={idx} className="rounded-2xl shadow-sm border-[#ddb59a] bg-white">
                         <CardHeader className="pb-2">
                           <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-                            <MapPin className="w-4 h-4 text-[#C83C2B]" /> {highlight(p.name, q)}
+                            <MapPin className="w-4 h-4 text-[#d44c2c]" /> {highlight(p.name, q)}
                           </CardTitle>
                           <div className="text-xs text-slate-500">{p.address}</div>
                         </CardHeader>
                         <CardContent>
                           <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="fee">
-                              <AccordionTrigger className="rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">입장료 / 비용</AccordionTrigger>
+                              <AccordionTrigger className="appearance-none rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
+                                입장료 / 비용
+                              </AccordionTrigger>
                               <AccordionContent className="pt-2">
                                 {Array.isArray(p.info.입장료) ? (
                                   <ul className="list-disc pl-5 space-y-1 text-[15px]">
@@ -425,8 +690,11 @@ export default function DanangPlannerApp() {
                                 )}
                               </AccordionContent>
                             </AccordionItem>
+
                             <AccordionItem value="tips">
-                              <AccordionTrigger className="mt-2 rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">팁</AccordionTrigger>
+                              <AccordionTrigger className="appearance-none mt-2 rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
+                                팁
+                              </AccordionTrigger>
                               <AccordionContent className="pt-2">
                                 <ul className="list-disc pl-5 space-y-1 text-[15px]">
                                   {p.info.팁.map((t, i) => (
@@ -435,8 +703,11 @@ export default function DanangPlannerApp() {
                                 </ul>
                               </AccordionContent>
                             </AccordionItem>
+
                             <AccordionItem value="pack">
-                              <AccordionTrigger className="mt-2 rounded-xl bg-white border border-[#F2D9C4] px-4 py-3 text-[15px] data-[state=open]:bg-[#FFF1D6]">챙길 것</AccordionTrigger>
+                              <AccordionTrigger className="appearance-none mt-2 rounded-xl bg-white border border-[#ddb59a] px-4 py-3 text-[15px] data-[state=open]:bg-[#fdf6eb]">
+                                챙길 것
+                              </AccordionTrigger>
                               <AccordionContent className="pt-2">
                                 <ul className="list-disc pl-5 space-y-1 text-[15px]">
                                   {p.info.챙길것.map((t, i) => (
@@ -456,15 +727,15 @@ export default function DanangPlannerApp() {
           )}
         </AnimatePresence>
 
-        {/* 푸터 도구 모음 */}
+        {/* 푸터 */}
         <div className="mt-8 sm:mt-10 grid gap-3 sm:flex sm:items-center sm:justify-between">
-          <div className="text-sm text-slate-500">
+          <div className="text-sm text-slate-600">
             ※ 금액/운영 정보는 현지 사정에 따라 변동될 수 있어요. 최신 정보는 현지 매표소/공식 채널을 확인하세요.
           </div>
           <div className="flex gap-2">
             <Dialog>
               <DialogTrigger asChild>
-                <button className="rounded-full bg-white border border-[#F2D9C4] text-slate-700 hover:bg-[#FFF1D6] h-10 px-4">
+                <button className="rounded-full bg-white border border-[#ddb59a] text-slate-700 hover:bg-[#fdf6eb] h-10 px-4">
                   공유/내보내기
                 </button>
               </DialogTrigger>
@@ -478,7 +749,10 @@ export default function DanangPlannerApp() {
                 </div>
               </DialogContent>
             </Dialog>
-            <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="rounded-full bg-[#DA251D] hover:bg-[#C83C2B] h-10 px-4 text-white">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="rounded-full bg-[#d44c2c] hover:bg-[#c74325] h-10 px-4 text-white"
+            >
               맨 위로
             </button>
           </div>
