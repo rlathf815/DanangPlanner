@@ -26,19 +26,19 @@ import {
    데이터 (한국어)
    ========================= */
 const DATA = {
-  overview: {
-    title: "전체 일정",
-    description: "9월 5일(금) ~ 9월 9일(화) 다낭 • 호이안 • 바나힐 핵심 일정 요약",
-    items: [
-      { time: "D1", name: "도착 / 체크인: 센터 포인트 다낭 호텔 & 레지던스 ", icon: "plane" },
-      { time: "D2", name: "바나힐 • 골든브릿지", icon: "mountain" },
-      { time: "D2 밤", name: "마담 란 • 용다리 불쇼", icon: "ship" },
-      { time: "D3", name: "호이안 투어 • 쿠킹클래스", icon: "landmark" },
-      { time: "D3 밤", name: "소원배 • 야시장", icon: "ship" },
-      { time: "D4", name: "오행산 • 마사지 • 야시장", icon: "mountainSnow" },
-      { time: "D5", name: "다낭 대성당 • 롯데마트", icon: "landmark" },
-    ],
-  },
+overview: {
+  title: "전체 일정",
+  description: "9월 5일(금) ~ 9월 9일(화) 다낭 • 호이안 • 바나힐 핵심 일정 요약",
+  items: [
+    { time: "D1", name: "도착 / 체크인: 센터 포인트 다낭 호텔 & 레지던스", icon: "plane" },
+    { time: "D2", name: "오행산 • 마담 란 • 용다리 불쇼", icon: "mountainSnow" },
+    { time: "D3", name: "호이안 투어 • 쿠킹클래스", icon: "landmark" },
+    { time: "D3 밤", name: "소원배 • 야시장", icon: "ship" },
+    { time: "D4", name: "바나힐 • 비어플라자 • 선짜 야시장", icon: "mountain" },
+    { time: "D5", name: "다낭 대성당 • 롯데마트", icon: "landmark" },
+  ],
+},
+
   sections: [
     /* ------------------- DAY 섹션 ------------------- */
      {
