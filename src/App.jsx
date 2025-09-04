@@ -592,20 +592,26 @@ export default function DanangPlannerApp() {
         </Card>
 
         {/* 검색 + 카테고리 */}
-        <div style={{display:"grid", gap:12, marginBottom:16}}>
-          <Input value={q} onChange={(e)=>setQ(e.target.value)} placeholder="장소/팁/입장료/쇼핑 항목 검색" />
-          <div className="category-row">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setActive(c.id)}
-                className={`category-btn ${active === c.id ? "active" : ""}`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
-        </div>
+<div style={{display:"grid", gap:12, marginBottom:16}}>
+  <Input
+    value={q}
+    onChange={(e)=>setQ(e.target.value)}
+    placeholder="장소/팁/입장료/쇼핑 항목 검색"
+    style={{ width: "280px" }}   // 🔹 가로폭 줄이기
+  />
+  <div className="category-row">
+    {CATEGORIES.map((c) => (
+      <button
+        key={c.id}
+        onClick={() => setActive(c.id)}
+        className={`category-btn ${active === c.id ? "active" : ""}`}
+      >
+        {c.label}
+      </button>
+    ))}
+  </div>
+</div>
+
 
         {/* 섹션 */}
         <AnimatePresence mode="popLayout">
