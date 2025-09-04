@@ -597,10 +597,28 @@ export default function DanangPlannerApp() {
     value={q}
     onChange={(e)=>setQ(e.target.value)}
     placeholder="장소/팁/입장료/쇼핑 항목 검색"
-    style={{ width: "280px" }}   // 🔹 가로폭 줄이기
+    style={{ width: "300px" }}   // 🔹 가로폭 줄이기
   />
+   {/* Day1~Day5 버튼 */}
   <div className="category-row">
-    {CATEGORIES.map((c) => (
+    {CATEGORIES.filter(c =>
+      ["day1","day2-bana","day3-hoian","day4-marble","day5-end"].includes(c.id)
+    ).map((c) => (
+      <button
+        key={c.id}
+        onClick={() => setActive(c.id)}
+        className={`category-btn ${active === c.id ? "active" : ""}`}
+      >
+        {c.label}
+      </button>
+    ))}
+  </div>
+
+  {/* 쇼핑리스트~체크리스트 버튼 */}
+  <div className="category-row">
+    {CATEGORIES.filter(c =>
+      ["shopping","grab","warning","checklist"].includes(c.id)
+    ).map((c) => (
       <button
         key={c.id}
         onClick={() => setActive(c.id)}
